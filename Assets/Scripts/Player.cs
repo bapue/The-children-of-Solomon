@@ -1,70 +1,41 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    public int Health { get; set; } = 100;
-    public int MaxHealth = 100;
+    
+    [Header("생명 및 돈 변수")]
+    public int money { get; set; } = 0;
+    
+    [Header("능력치 관련 변수")]
+    public int strength = 10; //근력
+    public int intelligence = 10; //지능
+    public int wisdom = 10; //지혜
+    public int dexterity = 10; //재주
+    public int charisma = 10; //매력
+    public int luck = 10; //운
 
-    public int Mental { get; set; } = 100;
-    public int MaxMental = 100;
-
-    public int Money { get; set; } = 0;
-
-
+    
+    [Header("레벨 업 관련 변수")]
+    public int level = 1;
+    public int exp = 0;
+    public int maxExp = 100;
+    public int skillPoint = 0;
+    
     public void InitSetting()
     {
-        Health = 100;
-        MaxHealth = 100;
-        Mental = 100;
-        MaxMental = 100;
-        Money = 0;
+        money = 0;
     }
 
-    public void TakeDamage(int damage)
-    {
-        Health -= damage;
-        if (Health <= 0)
-        {
-            //TODO: Die
-        }
-    }
-
-    public void HealHealth(int amount)
-    {
-        Health += amount;
-        if (Health > MaxHealth)
-        {
-            Health = MaxHealth;
-        }
-    }
-
-    public void TakeMental(int damage)
-    {
-        Mental -= damage;
-        if (Mental <= 0)
-        {
-            Die();
-        }
-    }
-    
-    public void HealMental(int amount)
-    {
-        Mental += amount;
-        if (Mental > MaxMental)
-        {
-            Mental = MaxMental;
-        }
-    }
-    
     public void AddMoney(int amount)
     {
-        Money += amount;
+        money += amount;
     }
     
     public void RemoveMoney(int amount)
     {
-        Money -= amount;
+        money -= amount;
     }
 
     public void Die()
