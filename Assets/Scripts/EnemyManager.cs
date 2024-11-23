@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField]
     private Health health;
+
     public void InitUI()
     {
         enemyData = enemyDatas[ranNum];
@@ -54,14 +55,16 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
     
     
     //적이 나타날때 랜덤과 동시에 UI 초기화
     public void RollEnemy()
     {
-        ranNum = Random.Range(0, 3);
+        //ranNum = Random.Range(0, enemyDatas.Count);
+        UniqueRandom();
+        Debug.Log("Random Number: " + ranNum);
         InitUI();
     }
 
@@ -69,12 +72,14 @@ public class EnemyManager : MonoBehaviour
     {
         health.TakeHealthDamage(enemyData.Damage);
     }
-    
-    
-    //죽었는지 체크하여 리스트에서 제거
-    public void CheckEnemyDead()
+
+
+    public void UniqueRandom()
     {
-        
-        
+        int[] randomNumbers = Utils.MakeRandomNumbers(0, 3);
+        for (int i = 0; i < randomNumbers.Length; i++)
+        {
+            Debug.Log(randomNumbers[i]);
+        }    
     }
 }
