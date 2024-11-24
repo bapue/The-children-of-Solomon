@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +10,9 @@ public class EnemyManager : MonoBehaviour
 {
 
     private int ranNum;
+    public List<int> randomNumbers = new List<int>();
+
+    
     
     public Image enemyProfile;
     public TMP_Text enemyName;
@@ -43,7 +47,7 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("Random Number: " + ranNum);
     
-            RollEnemy();
+            UniqueRandom();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -55,18 +59,10 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        
+        randomNumbers = Enumerable.Range(0, enemyDatas.Count).ToList();
     }
     
     
-    //적이 나타날때 랜덤과 동시에 UI 초기화
-    public void RollEnemy()
-    {
-        //ranNum = Random.Range(0, enemyDatas.Count);
-        UniqueRandom();
-        Debug.Log("Random Number: " + ranNum);
-        InitUI();
-    }
 
     public void EnemyAttack()
     {
@@ -74,12 +70,16 @@ public class EnemyManager : MonoBehaviour
     }
 
 
+
+    //중복없는 난수 생성
     public void UniqueRandom()
     {
-        int[] randomNumbers = Utils.MakeRandomNumbers(0, 3);
-        for (int i = 0; i < randomNumbers.Length; i++)
-        {
-            Debug.Log(randomNumbers[i]);
-        }    
+        ranNum = Random.Range(0, randomNumbers.Count);
+        Debug.Log(randomNumbers[ranNum]);
+        randomNumbers.RemoveAt(ranNum);
+        
+        InitUI();
     }
+    
+    
 }
