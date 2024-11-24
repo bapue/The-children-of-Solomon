@@ -72,12 +72,12 @@ public class EnemyManager : MonoBehaviour
 
 
     //중복없는 난수 생성
+    //TODO: 플레이어가 죽고나서 다시 시작할때 리스트를 초기화해줘야하는 작업 필요
     public void UniqueRandom()
     {
         ranNum = Random.Range(0, randomNumbers.Count);
         Debug.Log(randomNumbers[ranNum]);
         randomNumbers.RemoveAt(ranNum);
-        
         InitUI();
     }
     
